@@ -13,23 +13,23 @@ import {
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 
-import { readEvents } from '../actions'
+import { readArticles } from '../actions'
 
-class EventsIndex extends Component {
+class ArticlesIndex extends Component {
   componentDidMount(){
-    this.props.readEvents()
+    this.props.readArticles()
   }
 
-  renderEvents() {
-    return _.map(this.props.events, event => (
-      <TableRow key={event.id}>
-        <TableRowColumn>{event.id}</TableRowColumn>
+  renderArticles() {
+    return _.map(this.props.articles, article => (
+      <TableRow key={article.id}>
+        <TableRowColumn>{article.id}</TableRowColumn>
         <TableRowColumn>
-          <Link to={`/events/${event.id}`}>
-            {event.title}
+          <Link to={`/articles/${article.id}`}>
+            {article.title}
           </Link>
         </TableRowColumn>
-        <TableRowColumn>{event.body}</TableRowColumn>
+        <TableRowColumn>{article.body}</TableRowColumn>
       </TableRow>
     ))
   }
@@ -40,9 +40,10 @@ class EventsIndex extends Component {
       right: 12,
       bottom: 12,
     }
+
     return (
       <React.Fragment>
-        <FloatingActionButton style={style}containerElement={<Link to= '/events/new' />}>
+        <FloatingActionButton style={style}containerElement={<Link to= '/articles/new' />}>
           <ContentAdd />
         </FloatingActionButton>
 
@@ -58,17 +59,15 @@ class EventsIndex extends Component {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            {this.renderEvents()}
+            {this.renderArticles()}
           </TableBody>
         </Table>
-
-
       </React.Fragment>
     )
   }
 }
 
-const mapStateToProps = state => ({ events: state.events })
-const mapDispatchToProps = ({readEvents})
+const mapStateToProps = state => ({ articles: state.articles })
+const mapDispatchToProps = ({readArticles})
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventsIndex)
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlesIndex)

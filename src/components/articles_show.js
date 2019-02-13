@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
-import { getEvent, deleteEvent, putEvent } from '../actions'
+import { getArticle, deleteArticle, putArticle } from '../actions'
 
-class EventsShow extends Component {
+class ArticlesShow extends Component {
   constructor(props){
     super(props)
     this.onSubmit = this.onSubit.bind(this)
@@ -16,7 +16,7 @@ class EventsShow extends Component {
 
   componentDidMount(){
     const{ id } = this.props.match.params
-    if (id) this.props.getEvent(id)
+    if (id) this.props.getArticle(id)
   }
 
   renderField(field){
@@ -35,13 +35,13 @@ class EventsShow extends Component {
   }
 
   async onSubit(values) {
-    await this.props.putEvent(values)
+    await this.props.putArticle(values)
     this.props.history.push('/')
   }
 
   async onDeleteClick() {
     const {id} = this.props.match.params
-    await this.props.deleteEvent(id)
+    await this.props.deleteArticle(id)
     this.props.history.push('/')
   }
 
@@ -53,7 +53,8 @@ class EventsShow extends Component {
         <div><Field label="Title" name="title" type="text" component={this.renderField} /></div>
         <div><Field label="Body" name="body" type="text" component={this.renderField} /></div>
         <RaisedButton label='Submit' type='submit' style={style} disabled={pristine || submitting || invalid} />
-        <RaisedButton label='Cancel'  style={style} conteinerElement={<Link to='/' />} />
+        <RaisedButton label='Cancel' style={style} containerElement={<Link to="/" />}/>
+        <RaisedButton label='Delete' style={style} onClick={this.onDeleteClick}/>
       </form>
     )
   }
@@ -68,11 +69,11 @@ const validate = values => {
 }
 
  const mapStateToProps = (state, ownProps) => {
-   const event = state.events[ownProps.match.params.id]
-   return { initialValues: event, event }
+   const article = state.articles[ownProps.match.params.id]
+   return { initialValues: article, article }
  }
- const mapDispatchToProps = ({deleteEvent, getEvent, putEvent})
+ const mapDispatchToProps = ({deleteArticle, getArticle, putArticle})
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  reduxForm({ validate, form: 'eventShowForm', enableReinitialize: true})(EventsShow)
+  reduxForm({ validate, form: 'articleShowForm', enableReinitialize: true})(ArticlesShow)
 )

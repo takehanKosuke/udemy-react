@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
-import { postEvent } from '../actions'
+import { postArticle } from '../actions'
 
-class EventsNew extends Component {
+class ArticlesNew extends Component {
   constructor(props){
     super(props)
     this.onSubmit = this.onSubit.bind(this)
@@ -28,7 +28,7 @@ class EventsNew extends Component {
   }
 
   async onSubit(values) {
-    await this.props.postEvent(values)
+    await this.props.postArticle(values)
     this.props.history.push('/')
   }
 
@@ -40,7 +40,7 @@ class EventsNew extends Component {
         <div><Field label="Title" name="title" type="text" component={this.renderField} /></div>
         <div><Field label="Body" name="body" type="text" component={this.renderField} /></div>
         <RaisedButton label='Submit' type='submit' style={style} disabled={pristine || submitting || invalid} />
-        <RaisedButton label='Cancel'  style={style} conteinerElement={<Link to='/' />} />
+        <RaisedButton label='Cance l'  style={style} conteinerElement={<Link to='/' />} />
       </form>
     )
   }
@@ -53,8 +53,8 @@ const validate = values => {
 
   return errors
 }
-const mapDispatchToProps = ({postEvent})
+const mapDispatchToProps = ({postArticle})
 
 export default connect(null, mapDispatchToProps)(
-  reduxForm({ validate, form: 'eventNewForm'})(EventsNew)
+  reduxForm({ validate, form: 'eventNewForm'})(ArticlesNew)
 )

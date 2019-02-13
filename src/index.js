@@ -9,9 +9,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './index.css';
 import reducer from './reducers'
-import EventsIndex from './components/events_index';
-import EventsNew from './components/events_new';
-import EventsShow from './components/events_show';
+import ArticlesIndex from './components/articles_index';
+import ArticlesNew from './components/articles_new';
+import ArticlesShow from './components/articles_show';
 import registerServiceWorker from './registerServiceWorker';
 
 const enhancer = process.env.NODE_ENV === 'development' ?
@@ -24,10 +24,10 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route path ="/events/new" component={EventsNew} />
-          <Route path ="/events/:id" component={EventsShow} />
-          <Route exact path="/" component={EventsIndex} />
-          <Route exact path="/events" component={EventsShow} />
+          <Route path ="/articles/new" component={ArticlesNew} />
+          <Route path ="/articles/:id" component={ArticlesShow} />
+          <Route exact path="/" component={ArticlesIndex} />
+          <Route exact path="/articles" component={ArticlesShow} />
         </Switch>
       </BrowserRouter>
     </Provider>
