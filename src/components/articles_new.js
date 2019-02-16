@@ -40,7 +40,7 @@ class ArticlesNew extends Component {
         <div><Field label="Title" name="title" type="text" component={this.renderField} /></div>
         <div><Field label="Body" name="body" type="text" component={this.renderField} /></div>
         <RaisedButton label='Submit' type='submit' style={style} disabled={pristine || submitting || invalid} />
-        <RaisedButton label='Cance l'  style={style} conteinerElement={<Link to='/' />} />
+        <RaisedButton label='Cancel'  style={style} conteinerElement={<Link to='/' />} />
       </form>
     )
   }
